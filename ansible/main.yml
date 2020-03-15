@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  strategy: free
+  roles:
+    - node-exporter
+    - polkadot-common
+
+- hosts: all
+  become: yes
+  roles:
+    - common
+    - polkadot-public
+    - health-check
