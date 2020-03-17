@@ -11,7 +11,6 @@ ExecStart=/usr/local/bin/polkadot \
          -l{{ loggingFilter }} \
          {% endif %}
          --reserved-nodes /ip4/{{ relay_ip_address }}/tcp/30333/p2p/{{ relay_p2p_address }} \
-         {% endfor %}
          {% if telemetryUrl is defined and telemetryUrl|length %}
          --telemetry-url {{ telemetryUrl }}
          {% else %}

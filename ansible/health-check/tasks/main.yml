@@ -26,7 +26,7 @@
 - name: copy health check agent binary
   shell: |
     set -o pipefail
-    cp /root/health_check/agent /usr/local/bin/
+    cp /root/health_check/health_check_agent /usr/local/bin/
     chmod 755 /usr/local/bin/health_check_agent
     chown root:root /usr/local/bin/health_check_agent
   args:
@@ -34,9 +34,9 @@
   changed_when: False
 
 - name: check if health check script exists
-    stat:
-      path: /usr/local/bin/health_check_script.sh
-    register: health_script_exists
+  stat:
+    path: /usr/local/bin/health_check_script.sh
+  register: health_script_exists
 
 - name: create health check script
   template:
@@ -51,7 +51,6 @@
     owner: root
     group: root
     mode: 0600
-  when: healthagent_service_running.stdout == "no"
 
 - name: start health check agent service
   systemd:
