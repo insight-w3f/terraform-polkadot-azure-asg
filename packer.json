@@ -1,0 +1,48 @@
+{
+  "builders"  : [{
+    "type": "azure-arm",
+    "location": "{{user `zone`}}",
+
+    "client_id": "{{user `client_id`}}",
+    "client_secret": "{{user `client_secret`}}",
+    "subscription_id": "{{user `subscription_id`}}",
+
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "18.04-LTS",
+    "vm_size": "Standard_A2_v2",
+
+    "managed_image_name": "packer-sentry",
+    "managed_image_resource_group_name": "polkadot"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "echo here",
+        "sudo apt-get install -y ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../terraform-polkadot-azure-asg-node/ansible/main.yml",
+      "role_paths": [
+        "../terraform-polkadot-azure-asg-node/ansible/common",
+        "../terraform-polkadot-azure-asg-node/ansible/node-exporter",
+        "../terraform-polkadot-azure-asg-node/ansible/polkadot-common",
+        "../terraform-polkadot-azure-asg-node/ansible/polkadot-public",
+        "../terraform-polkadot-azure-asg-node/ansible/health-check"],
+      "extra_arguments": ["-e \"node_exporter_user={{user `node_exporter_user`}} node_exporter_password={{user `node_exporter_password`}} node_exporter_binary_url={{user `node_exporter_binary_url`}} node_exporter_binary_checksum={{user `node_exporter_binary_checksum`}} polkadot_binary_url={{user `polkadot_binary_url`}} polkadot_binary_checksum={{user `polkadot_binary_checksum`}} polkadot_chain={{user `polkadot_chain`}} polkadot_restart_enabled={{user `polkadot_restart_enabled`}} polkadot_restart_minute={{user `polkadot_restart_minute`}} polkadot_restart_hour={{user `polkadot_restart_hour`}} polkadot_restart_day={{user `polkadot_restart_day`}} polkadot_restart_month={{user `polkadot_restart_month`}} polkadot_restart_weekday={{user `polkadot_restart_weekday`}} telemetryUrl={{user `telemetry_url`}} loggingFilter={{user `logging_filter`}} relay_ip_address={{user `relay_ip_address`}} relay_p2p_address={{user `relay_p2p_address`}}\""]
+    },
+    {
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+        "/usr/sbin/waagent -force -deprovision && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }
+  ]
+}
