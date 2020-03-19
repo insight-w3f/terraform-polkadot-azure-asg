@@ -1,3 +1,7 @@
+locals {
+  time_now = formatdate("YYYYMMDDhhmmss", timestamp())
+}
+
 module "label" {
   source = "github.com/robc-io/terraform-null-label.git?ref=0.16.1"
   tags = {
@@ -18,6 +22,7 @@ module "packer" {
   packer_config_path = "${path.module}/packer.json"
   timestamp_ui       = true
   vars = {
+    timestamp : local.time_now,
     client_id : var.client_id,
     client_secret : var.client_secret,
     subscription_id : var.subscription_id,
