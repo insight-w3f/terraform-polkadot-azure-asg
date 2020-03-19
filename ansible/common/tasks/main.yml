@@ -25,6 +25,16 @@
   when:
     - not ufw_status_result.stdout is search("30333/tcp.*ALLOW IN.*Anywhere")
 
+- name: open RPC port
+  command: ufw allow 9933/tcp
+  when:
+    - not ufw_status_result.stdout is search("9933/tcp.*ALLOW IN.*Anywhere")
+
+- name: open health check port
+  command: ufw allow 5500/tcp
+  when:
+    - not ufw_status_result.stdout is search("5500/tcp.*ALLOW IN.*Anywhere")
+
 - name: enable firewall
   shell: |
     set -o pipefail
