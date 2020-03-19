@@ -52,3 +52,65 @@ module "packer" {
 output "cmd" {
   value = module.packer.packer_command
 }
+
+data azurerm_resource_group "this" {
+  name = var.azure_resource_group_name
+}
+
+data "azurerm_image" "this" {
+  name                = "packer-sentry-${local.time_now}"
+  resource_group_name = data.azurerm_resource_group.this.name
+  depends_on          = [module.packer]
+  sort_descending     = true
+}
+
+resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
+  name                = "polkadot-sentry"
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  sku                 = var.instance_type
+  instances           = var.num_instances
+  admin_username      = "ubuntu"
+
+  admin_ssh_key {
+    username   = "ubuntu"
+    public_key = file(var.public_key_path)
+  }
+
+  source_image_id = data.azurerm_image.this.id
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+
+  data_disk {
+    storage_account_type = "StandardSSD_LRS"
+    caching              = "ReadWrite"
+    disk_size_gb         = 256
+    lun                  = 0
+  }
+
+  network_interface {
+    name    = "Public"
+    primary = true
+
+    ip_configuration {
+      name                                   = "Public"
+      primary                                = true
+      application_security_group_ids         = [var.security_group_id]
+      subnet_id                              = var.public_subnet_id
+      load_balancer_backend_address_pool_ids = [var.lb_backend_pool_id]
+    }
+  }
+
+  network_interface {
+    name = "Private"
+
+    ip_configuration {
+      name                           = "Private"
+      application_security_group_ids = [var.security_group_id]
+      subnet_id                      = var.private_subnet_id
+    }
+  }
+}

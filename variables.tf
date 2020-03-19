@@ -17,6 +17,11 @@ variable "subscription_id" {
   type        = string
 }
 
+variable "azure_resource_group_name" {
+  description = "Name of Azure Resource Group"
+  type        = string
+}
+
 ########
 # Label
 ########
@@ -51,9 +56,9 @@ variable "owner" {
 }
 
 variable "zone" {
-  description = "The GCP zone to deploy in"
+  description = "The Azure zone to deploy in"
   type        = string
-  default     = "US East"
+  default     = "eastus"
 }
 
 #####
@@ -69,6 +74,44 @@ variable "key_name" {
   description = "The name of the preexisting key to be used instead of the local public_key_path"
   type        = string
   default     = ""
+}
+
+variable "instance_type" {
+  description = "Instance type"
+  type        = string
+  default     = "Standard_A2_v2"
+}
+
+variable "num_instances" {
+  description = "Number of instances for ASG"
+  type        = number
+  default     = 1
+}
+
+#########
+# Network
+#########
+variable "public_subnet_id" {
+  description = "The id of the subnet."
+  type        = string
+  default     = ""
+}
+
+variable "private_subnet_id" {
+  description = "The id of the subnet."
+  type        = string
+  default     = ""
+}
+
+variable "security_group_id" {
+  description = "The id of the security group to run in"
+  type        = string
+  default     = ""
+}
+
+variable "lb_backend_pool_id" {
+  description = "The ID of the load balancer backend IP pool"
+  type        = string
 }
 
 #####
