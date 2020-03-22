@@ -13,7 +13,7 @@
     "image_sku": "18.04-LTS",
     "vm_size": "Standard_A2_v2",
 
-    "managed_image_name": "packer-sentry-{{user `timestamp`}}",
+    "managed_image_name": "packer-sentry",
     "managed_image_resource_group_name": "polkadot"
   }],
   "provisioners": [
