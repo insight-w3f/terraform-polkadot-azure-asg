@@ -52,13 +52,13 @@ No issue is creating limit on this module.
 | num\_instances | Number of instances for ASG | `number` | `1` | no |
 | owner | Owner of the infrastructure | `string` | `""` | no |
 | polkadot\_chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
-| private\_subnet\_id | The id of the subnet. | `string` | `""` | no |
+| private\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | project | Name of the project for node name | `string` | `"project"` | no |
 | public\_key\_path | The path to the public ssh key | `string` | `""` | no |
-| public\_subnet\_id | The id of the subnet. | `string` | `""` | no |
+| public\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | relay\_node\_ip | Internal IP of Polkadot relay node | `string` | n/a | yes |
 | relay\_node\_p2p\_address | P2P address of Polkadot relay node | `string` | n/a | yes |
-| security\_group\_id | The id of the security group to run in | `string` | `""` | no |
+| security\_group\_id | The id of the security group to run in | `string` | n/a | yes |
 | ssh\_user | Username for SSH | `string` | `"ubuntu"` | no |
 | stage | The stage of the deployment | `string` | `""` | no |
 | subscription\_id | Azure subscription ID | `string` | n/a | yes |

@@ -94,19 +94,16 @@ variable "num_instances" {
 variable "public_subnet_id" {
   description = "The id of the subnet."
   type        = string
-  default     = ""
 }
 
 variable "private_subnet_id" {
   description = "The id of the subnet."
   type        = string
-  default     = ""
 }
 
 variable "security_group_id" {
   description = "The id of the security group to run in"
   type        = string
-  default     = ""
 }
 
 variable "lb_backend_pool_id" {
