@@ -40,6 +40,7 @@ No issue is creating limit on this module.
 | azure\_resource\_group\_name | Name of Azure Resource Group | `string` | n/a | yes |
 | client\_id | Azure SP for Packer ID | `string` | n/a | yes |
 | client\_secret | Azure SP for Packer secret | `string` | n/a | yes |
+| create | Bool to create the resources | `bool` | `true` | no |
 | environment | The environment | `string` | `""` | no |
 | instance\_type | Instance type | `string` | `"Standard_A2_v2"` | no |
 | key\_name | The name of the preexisting key to be used instead of the local public\_key\_path | `string` | `""` | no |
@@ -54,7 +55,7 @@ No issue is creating limit on this module.
 | polkadot\_chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
 | private\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | project | Name of the project for node name | `string` | `"project"` | no |
-| public\_key\_path | The path to the public ssh key | `string` | `""` | no |
+| public\_key\_path | The path to the public ssh key | `string` | n/a | yes |
 | public\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | relay\_node\_ip | Internal IP of Polkadot relay node | `string` | n/a | yes |
 | relay\_node\_p2p\_address | P2P address of Polkadot relay node | `string` | n/a | yes |
@@ -70,6 +71,7 @@ No issue is creating limit on this module.
 | Name | Description |
 |------|-------------|
 | cmd | n/a |
+| scale\_set\_name | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

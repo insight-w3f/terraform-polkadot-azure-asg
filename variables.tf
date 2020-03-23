@@ -1,7 +1,13 @@
+variable "create" {
+  description = "Bool to create the resources"
+  type        = bool
+  default     = true
+}
+
+
 #####
 # Azure
 #####
-
 variable "client_id" {
   description = "Azure SP for Packer ID"
   type        = string
@@ -67,7 +73,6 @@ variable "zone" {
 variable "public_key_path" {
   description = "The path to the public ssh key"
   type        = string
-  default     = ""
 }
 
 variable "key_name" {
