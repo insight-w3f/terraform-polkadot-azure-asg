@@ -1,7 +1,13 @@
+variable "create" {
+  description = "Bool to create the resources"
+  type        = bool
+  default     = true
+}
+
+
 #####
 # Azure
 #####
-
 variable "client_id" {
   description = "Azure SP for Packer ID"
   type        = string
@@ -67,7 +73,6 @@ variable "zone" {
 variable "public_key_path" {
   description = "The path to the public ssh key"
   type        = string
-  default     = ""
 }
 
 variable "key_name" {
@@ -94,19 +99,16 @@ variable "num_instances" {
 variable "public_subnet_id" {
   description = "The id of the subnet."
   type        = string
-  default     = ""
 }
 
 variable "private_subnet_id" {
   description = "The id of the subnet."
   type        = string
-  default     = ""
 }
 
 variable "security_group_id" {
   description = "The id of the security group to run in"
   type        = string
-  default     = ""
 }
 
 variable "lb_backend_pool_id" {
@@ -130,7 +132,7 @@ variable "node_exporter_password" {
   default     = "node_exporter_password"
 }
 
-variable "polkadot_chain" {
+variable "chain" {
   description = "Which Polkadot chain to join"
   type        = string
   default     = "kusama"

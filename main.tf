@@ -13,17 +13,23 @@ module "label" {
 }
 
 module "packer" {
+  create = var.create
+
   source = "github.com/insight-infrastructure/terraform-aws-packer-ami.git"
 
   packer_config_path = "${path.module}/packer.json"
   timestamp_ui       = true
   vars = {
+    module_path = path.module,
+
+    azure_resource_group_name = var.azure_resource_group_name,
+
     client_id : var.client_id,
     client_secret : var.client_secret,
     subscription_id : var.subscription_id,
     node_exporter_user : var.node_exporter_user,
     node_exporter_password : var.node_exporter_password,
-    polkadot_chain : var.polkadot_chain,
+    chain : var.chain,
     ssh_user : var.ssh_user,
     project : var.project,
     zone : var.zone,
@@ -40,15 +46,12 @@ module "packer" {
     telemetry_url : var.telemetry_url,
     logging_filter : var.logging_filter,
     relay_ip_address : var.relay_node_ip,
-    relay_p2p_address : var.relay_node_p2p_address
+    relay_p2p_address : var.relay_node_p2p_address,
   }
 }
 
-output "cmd" {
-  value = module.packer.packer_command
-}
 
-data azurerm_resource_group "this" {
+data "azurerm_resource_group" "this" {
   name = var.azure_resource_group_name
 }
 
@@ -60,6 +63,7 @@ data "azurerm_image" "this" {
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
+  count               = var.create ? 1 : 0
   name                = "polkadot-sentry"
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location

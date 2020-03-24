@@ -7,5 +7,9 @@
 .terragrunt-cache/
 .terraform/
 
+terraform.tfvars
+
 test/fixtures/keys/*
 !test/fixtures/keys/.gitkeep
+
+packer.json.bak
