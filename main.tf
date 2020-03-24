@@ -29,7 +29,7 @@ module "packer" {
     subscription_id : var.subscription_id,
     node_exporter_user : var.node_exporter_user,
     node_exporter_password : var.node_exporter_password,
-    polkadot_chain : var.polkadot_chain,
+    chain : var.chain,
     ssh_user : var.ssh_user,
     project : var.project,
     zone : var.zone,

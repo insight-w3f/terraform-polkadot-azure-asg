@@ -38,6 +38,7 @@ No issue is creating limit on this module.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | azure\_resource\_group\_name | Name of Azure Resource Group | `string` | n/a | yes |
+| chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
 | client\_id | Azure SP for Packer ID | `string` | n/a | yes |
 | client\_secret | Azure SP for Packer secret | `string` | n/a | yes |
 | create | Bool to create the resources | `bool` | `true` | no |
@@ -52,7 +53,6 @@ No issue is creating limit on this module.
 | node\_exporter\_user | User for node exporter | `string` | `"node_exporter_user"` | no |
 | num\_instances | Number of instances for ASG | `number` | `1` | no |
 | owner | Owner of the infrastructure | `string` | `""` | no |
-| polkadot\_chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
 | private\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | project | Name of the project for node name | `string` | `"project"` | no |
 | public\_key\_path | The path to the public ssh key | `string` | n/a | yes |
