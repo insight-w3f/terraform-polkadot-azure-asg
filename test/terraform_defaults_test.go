@@ -29,11 +29,18 @@ func TestTerraformDefaults(t *testing.T) {
 	publicKeyPath := path.Join(fixturesDir, "./keys/id_rsa_test.pub")
 	generateKeys(privateKeyPath, publicKeyPath)
 
+	client_id, _ := os.LookupEnv("ARM_CLIENT_ID")
+	client_secret, _ := os.LookupEnv("ARM_CLIENT_SECRET")
+	subscription_id, _ := os.LookupEnv("ARM_SUBSCRIPTION_ID")
+
 	terraformOptions := &terraform.Options{
 		TerraformDir: exampleFolder,
 		Vars: map[string]interface{}{
 			"public_key_path":    publicKeyPath,
 			"chain": "dev",
+			"client_id": client_id,
+			"client_secret": client_secret,
+			"subscription_id": subscription_id,
 		},
 	}
 
