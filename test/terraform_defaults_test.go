@@ -50,6 +50,7 @@ func TestTerraformDefaults(t *testing.T) {
 
 	test_structure.RunTestStage(t, "setup", func() {
 		terraform.InitAndApply(t, terraformOptions)
+		test_structure.SaveTerraformOptions(t, exampleFolder, terraformOptions)
 	})
 
 	test_structure.RunTestStage(t, "validate", func() {
