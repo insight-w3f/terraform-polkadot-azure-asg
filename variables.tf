@@ -106,8 +106,13 @@ variable "private_subnet_id" {
   type        = string
 }
 
-variable "security_group_id" {
-  description = "The id of the security group to run in"
+variable "application_security_group_id" {
+  description = "The id of the application security group to run in"
+  type        = string
+}
+
+variable "network_security_group_id" {
+  description = "The id of the network security group to run in"
   type        = string
 }
 

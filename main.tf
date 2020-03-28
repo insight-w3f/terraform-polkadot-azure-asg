@@ -91,24 +91,26 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
   }
 
   network_interface {
-    name    = "Public"
-    primary = true
+    name                      = "Public"
+    primary                   = true
+    network_security_group_id = var.network_security_group_id
 
     ip_configuration {
       name                                   = "Public"
       primary                                = true
-      application_security_group_ids         = [var.security_group_id]
+      application_security_group_ids         = [var.application_security_group_id]
       subnet_id                              = var.public_subnet_id
       load_balancer_backend_address_pool_ids = [var.lb_backend_pool_id]
     }
   }
 
   network_interface {
-    name = "Private"
+    name                      = "Private"
+    network_security_group_id = var.network_security_group_id
 
     ip_configuration {
       name                           = "Private"
-      application_security_group_ids = [var.security_group_id]
+      application_security_group_ids = [var.application_security_group_id]
       subnet_id                      = var.private_subnet_id
     }
   }
