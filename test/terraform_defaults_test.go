@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -81,8 +82,8 @@ func testLbEndpoints(t *testing.T, terraformOptions *terraform.Options) {
 			return "", err
 		}
 
-		if strings.TrimSpace(string(outputStatus)) != expectedStatus {
-			return "", fmt.Errorf("expected SSH command to return '%s' but got '%s'", expectedStatus, string(outputStatus))
+		if strings.TrimSpace(strconv.Itoa(outputStatus)) != expectedStatus {
+			return "", fmt.Errorf("expected SSH command to return '%s' but got '%s'", expectedStatus, strconv.Itoa(outputStatus))
 		}
 
 		return "", nil
