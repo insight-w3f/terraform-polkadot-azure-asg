@@ -27,17 +27,17 @@ module "lb" {
 module "defaults" {
   source = "../.."
 
-  azure_resource_group_name = azurerm_resource_group.this.name
-  client_id                 = var.client_id
-  client_secret             = var.client_secret
-  subscription_id           = var.subscription_id
-  lb_backend_pool_id        = module.lb.lb_backend_pool_id
-  relay_node_ip             = "1.2.3.4"
-  relay_node_p2p_address    = "stuffthingsstuffthingsstuffthingsstuffthingsstuffthings"
-  private_subnet_id         = module.network.private_subnets[0]
-  public_subnet_id          = module.network.public_subnets[0]
-  security_group_id         = module.network.sentry_security_group_id[0]
-  public_key_path           = var.public_key_path
-
-  chain = var.chain
+  azure_resource_group_name     = azurerm_resource_group.this.name
+  client_id                     = var.client_id
+  client_secret                 = var.client_secret
+  subscription_id               = var.subscription_id
+  lb_backend_pool_id            = module.lb.lb_backend_pool_id
+  relay_node_ip                 = "1.2.3.4"
+  relay_node_p2p_address        = "stuffthingsstuffthingsstuffthingsstuffthingsstuffthings"
+  private_subnet_id             = module.network.private_subnets[0]
+  public_subnet_id              = module.network.public_subnets[0]
+  public_key_path               = var.public_key_path
+  application_security_group_id = module.network.sentry_application_security_group_id[0]
+  network_security_group_id     = module.network.sentry_network_security_group_id[0]
+  chain                         = var.chain
 }
