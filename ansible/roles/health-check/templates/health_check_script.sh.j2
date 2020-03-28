@@ -6,9 +6,17 @@ IS_SYNCING=$(echo $QUERY_RESULT | jq '.result.isSyncing')
 PEERS=$(echo $QUERY_RESULT | jq '.result.peers')
 NEEDS_PEERS=$(echo $QUERY_RESULT | jq '.result.shouldHavePeers')
 
-if [ $IS_SYNCING = "false" ] && [ $PEERS -gt 0 ] && [ $NEEDS_PEERS = "true" ]
+if [ $IS_SYNCING = "false" ]
 then
-    exit 0
+	if [ $PEERS -gt 0 ] && [ $NEEDS_PEERS = "true" ]
+	then
+    	exit 0
+    elif [ $PEERS -eq 0 ] && [ $NEEDS_PEERS = "false" ]
+    then
+    	exit 0
+    else
+    	exit 1
+    fi
 else
     exit 1
 fi

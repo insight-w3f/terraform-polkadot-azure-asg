@@ -1,5 +1,11 @@
 ---
 # tasks file for health-check
+- name: Install JQ
+  apt:
+    name: jq
+    state: present
+    update_cache: yes
+
 - name: create gruntwork group
   group:
     name: gruntwork
@@ -42,6 +48,9 @@
   template:
     src: health_check_script.sh.j2
     dest: /usr/local/bin/health_check_script.sh
+    owner: gruntwork
+    group: gruntwork
+    mode: '0700'
   when: health_script_exists.stat.exists == False
 
 - name: create health check agent config
