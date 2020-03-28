@@ -25,7 +25,8 @@ module "lb" {
 }
 
 module "defaults" {
-  source                    = "../.."
+  source = "../.."
+
   azure_resource_group_name = azurerm_resource_group.this.name
   client_id                 = var.client_id
   client_secret             = var.client_secret

@@ -2,8 +2,8 @@ package test
 
 import (
 	"fmt"
+	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/retry"
-	"github.com/gruntwork-io/terratest/modules/shell"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 	"log"
@@ -63,33 +63,26 @@ func testLbEndpoints(t *testing.T, terraformOptions *terraform.Options) {
 
 	loadBalancerIp := terraform.Output(t, terraformOptions, "public_ip")
 
-	cmd := fmt.Sprintf("curl -sL --data-binary '{\"id\":1,\"jsonrpc\":\"2.0\",\"method\":\"system_health\", \"params\":[]}' -H 'content-type:application/json' -w %%{http_code} -o /dev/null http://%s:9933", loadBalancerIp)
-
 	expectedStatus := "200"
-
-	command := shell.Command{
-		Command:           cmd,
-		Args:              nil,
-		WorkingDir:        ".",
-		Env:               nil,
-		OutputMaxLineSize: 0,
-	}
+	body := strings.NewReader(`{"id":1, "jsonrpc":"2.0", "method":"system_health", "params":[]}`)
+	url := fmt.Sprintf("http://%s:9933", loadBalancerIp)
+	headers := make(map[string]string)
+	headers["Content-Type"] = "application/json"
 
 	description := fmt.Sprintf("curl to LB %s with error command", loadBalancerIp)
 	maxRetries := 30
 	timeBetweenRetries := 1 * time.Second
 
-	// Verify that we can SSH to the Instance and run commands
 	retry.DoWithRetry(t, description, maxRetries, timeBetweenRetries, func() (string, error) {
 
-		outputStatus, err := shell.RunCommandAndGetOutputE(t, command)
+		outputStatus, _, err := http_helper.HTTPDoE(t, "POST", url, body, headers, nil)
 
 		if err != nil {
 			return "", err
 		}
 
-		if strings.TrimSpace(outputStatus) != expectedStatus {
-			return "", fmt.Errorf("expected SSH command to return '%s' but got '%s'", expectedStatus, outputStatus)
+		if strings.TrimSpace(string(outputStatus)) != expectedStatus {
+			return "", fmt.Errorf("expected SSH command to return '%s' but got '%s'", expectedStatus, string(outputStatus))
 		}
 
 		return "", nil
