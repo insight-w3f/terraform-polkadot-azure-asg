@@ -1,7 +1,7 @@
-# terraform-polkadot-azure-asg-node
+# terraform-polkadot-azure-asg
 
-[![open-issues](https://img.shields.io/github/issues-raw/insight-infrastructure/terraform-polkadot-azure-asg-node?style=for-the-badge)](https://github.com/insight-infrastructure/terraform-polkadot-azure-asg-node/issues)
-[![open-pr](https://img.shields.io/github/issues-pr-raw/insight-infrastructure/terraform-polkadot-azure-asg-node?style=for-the-badge)](https://github.com/insight-infrastructure/terraform-polkadot-azure-asg-node/pulls)
+[![open-issues](https://img.shields.io/github/issues-raw/insight-w3f/terraform-polkadot-azure-asg?style=for-the-badge)](https://github.com/insight-w3f/terraform-polkadot-azure-asg/issues)
+[![open-pr](https://img.shields.io/github/issues-pr-raw/insight-w3f/terraform-polkadot-azure-asg?style=for-the-badge)](https://github.com/insight-w3f/terraform-polkadot-azure-asg/pulls)
 
 ## Features
 
@@ -15,13 +15,13 @@ For Terraform v0.12.0+
 
 ```
 module "this" {
-    source = "github.com/insight-infrastructure/terraform-polkadot-azure-asg-node"
+    source = "github.com/insight-w3f/terraform-polkadot-azure-asg"
 
 }
 ```
 ## Examples
 
-- [defaults](https://github.com/insight-infrastructure/terraform-polkadot-azure-asg-node/tree/master/examples/defaults)
+- [defaults](https://github.com/insight-w3f/terraform-polkadot-azure-asg/tree/master/examples/defaults)
 
 ## Known  Issues
 No issue is creating limit on this module.

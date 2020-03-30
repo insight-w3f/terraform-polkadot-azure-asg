@@ -15,12 +15,12 @@ variable "public_key_path" {}
 variable "chain" {}
 
 module "network" {
-  source                    = "github.com/insight-infrastructure/terraform-polkadot-azure-network.git?ref=master"
+  source                    = "github.com/insight-w3f/terraform-polkadot-azure-network.git?ref=master"
   azure_resource_group_name = azurerm_resource_group.this.name
 }
 
 module "lb" {
-  source                    = "github.com/insight-infrastructure/terraform-polkadot-azure-api-lb.git?ref=master"
+  source                    = "github.com/insight-w3f/terraform-polkadot-azure-api-lb.git?ref=master"
   azure_resource_group_name = azurerm_resource_group.this.name
 }
 
