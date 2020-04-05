@@ -1,7 +1,7 @@
 {
   "builders"  : [{
     "type": "azure-arm",
-    "location": "{{user `zone`}}",
+    "location": "{{user `location`}}",
 
     "client_id": "{{user `client_id`}}",
     "client_secret": "{{user `client_secret`}}",

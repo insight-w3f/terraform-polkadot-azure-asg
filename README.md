@@ -29,6 +29,10 @@ module "this" {
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -38,7 +42,7 @@ No issue is creating limit on this module.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | application\_security\_group\_id | The id of the application security group to run in | `string` | n/a | yes |
 | azure\_resource\_group\_name | Name of Azure Resource Group | `string` | n/a | yes |
 | chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
@@ -67,7 +71,6 @@ No issue is creating limit on this module.
 | stage | The stage of the deployment | `string` | `""` | no |
 | subscription\_id | Azure subscription ID | `string` | n/a | yes |
 | telemetry\_url | WSS URL for telemetry | `string` | `"wss://mi.private.telemetry.backend/"` | no |
-| zone | The Azure zone to deploy in | `string` | `"eastus"` | no |
 
 ## Outputs
 

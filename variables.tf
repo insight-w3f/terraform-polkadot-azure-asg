@@ -4,7 +4,6 @@ variable "create" {
   default     = true
 }
 
-
 #####
 # Azure
 #####
@@ -59,12 +58,6 @@ variable "owner" {
   description = "Owner of the infrastructure"
   type        = string
   default     = ""
-}
-
-variable "zone" {
-  description = "The Azure zone to deploy in"
-  type        = string
-  default     = "eastus"
 }
 
 #####
