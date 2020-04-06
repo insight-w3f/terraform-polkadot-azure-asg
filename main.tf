@@ -15,7 +15,7 @@ module "label" {
 module "packer" {
   create = var.create
 
-  source = "github.com/insight-infrastructure/terraform-aws-packer-ami.git"
+  source = "github.com/insight-infrastructure/terraform-packer-build.git"
 
   packer_config_path = "${path.module}/packer.json"
   timestamp_ui       = true
@@ -62,6 +62,12 @@ data "azurerm_image" "this" {
   sort_descending     = true
 }
 
+module "user_data" {
+  source         = "github.com/insight-w3f/terraform-polkadot-user-data.git?ref=master"
+  cloud_provider = "azure"
+  type           = "library"
+}
+
 resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
   count               = var.create ? 1 : 0
   name                = "polkadot-sentry"
@@ -70,6 +76,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
   sku                 = var.instance_type
   instances           = var.num_instances
   admin_username      = "ubuntu"
+  custom_data         = base64encode(module.user_data.user_data)
 
   admin_ssh_key {
     username   = "ubuntu"
