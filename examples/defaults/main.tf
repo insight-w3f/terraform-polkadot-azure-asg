@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "=2.0.0"
+  version = ">=2.0.0"
   features {}
 }
 
@@ -22,12 +22,14 @@ module "network" {
 module "lb" {
   source                    = "github.com/insight-w3f/terraform-polkadot-azure-api-lb.git?ref=master"
   azure_resource_group_name = azurerm_resource_group.this.name
+  use_external_lb           = true
 }
 
 module "defaults" {
   source = "../.."
 
-  azure_resource_group_name     = azurerm_resource_group.this.name
+  azure_resource_group_name = azurerm_resource_group.this.name
+
   client_id                     = var.client_id
   client_secret                 = var.client_secret
   subscription_id               = var.subscription_id
