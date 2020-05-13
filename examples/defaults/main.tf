@@ -13,6 +13,7 @@ variable "client_id" {}
 variable "subscription_id" {}
 variable "public_key_path" {}
 variable "chain" {}
+variable "tenant_id" {}
 
 module "network" {
   source                    = "github.com/insight-w3f/terraform-polkadot-azure-network.git?ref=master"
@@ -33,6 +34,7 @@ module "defaults" {
   client_id                     = var.client_id
   client_secret                 = var.client_secret
   subscription_id               = var.subscription_id
+  tenant_id                     = var.tenant_id
   lb_backend_pool_id            = module.lb.lb_backend_pool_id
   relay_node_ip                 = "1.2.3.4"
   relay_node_p2p_address        = "stuffthingsstuffthingsstuffthingsstuffthingsstuffthings"
