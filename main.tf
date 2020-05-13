@@ -47,6 +47,10 @@ module "packer" {
     logging_filter : var.logging_filter,
     relay_ip_address : var.relay_node_ip,
     relay_p2p_address : var.relay_node_p2p_address,
+    consul_datacenter : data.azurerm_resource_group.this.location,
+    consul_enabled : var.consul_enabled,
+    prometheus_enabled : var.prometheus_enabled,
+    retry_join : "\"provider=azure tenant_id=${var.tenant_id} client_id=${var.client_id} subscription_id=${var.subscription_id} secret_access_key=\"${var.client_secret}\" resource_group=${var.k8s_resource_group} vm_scale_set=${var.k8s_scale_set}\""
   }
 }
 
@@ -63,9 +67,13 @@ data "azurerm_image" "this" {
 }
 
 module "user_data" {
-  source         = "github.com/insight-w3f/terraform-polkadot-user-data.git?ref=master"
-  cloud_provider = "azure"
-  type           = "library"
+  source              = "github.com/insight-w3f/terraform-polkadot-user-data.git?ref=master"
+  cloud_provider      = "azure"
+  type                = "library"
+  consul_enabled      = var.consul_enabled
+  prometheus_enabled  = var.prometheus_enabled
+  prometheus_user     = var.node_exporter_user
+  prometheus_password = var.node_exporter_password
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
