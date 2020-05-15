@@ -6,6 +6,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/retry"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
+	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -29,6 +30,11 @@ func TestTerraformDefaults(t *testing.T) {
 	privateKeyPath := path.Join(fixturesDir, "./keys/id_rsa_test")
 	publicKeyPath := path.Join(fixturesDir, "./keys/id_rsa_test.pub")
 	generateKeys(privateKeyPath, publicKeyPath)
+	dat, err := ioutil.ReadFile(publicKeyPath)
+	if err != nil{
+		panic(err)
+	}
+	publicKey := string(dat)
 
 	clientId, _ := os.LookupEnv("ARM_CLIENT_ID")
 	clientSecret, _ := os.LookupEnv("ARM_CLIENT_SECRET")
@@ -38,7 +44,7 @@ func TestTerraformDefaults(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: exampleFolder,
 		Vars: map[string]interface{}{
-			"public_key_path": publicKeyPath,
+			"public_key": publicKey,
 			"chain":           "dev",
 			"client_id":       clientId,
 			"client_secret":   clientSecret,
