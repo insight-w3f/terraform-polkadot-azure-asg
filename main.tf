@@ -33,10 +33,10 @@ module "packer" {
     ssh_user : var.ssh_user,
     project : var.project,
     location : data.azurerm_resource_group.this.location,
-    polkadot_binary_url : "https://github.com/w3f/polkadot/releases/download/v0.7.21/polkadot",
-    polkadot_binary_checksum : "sha256:af561dc3447e8e6723413cbeed0e5b1f0f38cffaa408696a57541897bf97a34d",
-    node_exporter_binary_url : "https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz",
-    node_exporter_binary_checksum : "sha256:b2503fd932f85f4e5baf161268854bf5d22001869b84f00fd2d1f57b51b72424",
+    polkadot_binary_url : var.polkadot_client_url,
+    polkadot_binary_checksum : "sha256:${var.polkadot_client_hash}",
+    node_exporter_binary_url : var.node_exporter_url,
+    node_exporter_binary_checksum : "sha256:${var.node_exporter_hash}",
     polkadot_restart_enabled : true,
     polkadot_restart_minute : "50",
     polkadot_restart_hour : "10",
@@ -88,7 +88,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
 
   admin_ssh_key {
     username   = "ubuntu"
-    public_key = file(var.public_key_path)
+    public_key = var.public_key
   }
 
   source_image_id = data.azurerm_image.this.id
@@ -115,7 +115,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
       primary                                = true
       application_security_group_ids         = [var.application_security_group_id]
       subnet_id                              = var.public_subnet_id
-      load_balancer_backend_address_pool_ids = [var.lb_backend_pool_id]
+      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.this[0].id]
     }
   }
 

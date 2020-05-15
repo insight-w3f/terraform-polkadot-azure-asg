@@ -56,7 +56,6 @@ No requirements.
 | k8s\_resource\_group | Name of resource group where kubernetes cluster resources are | `string` | `""` | no |
 | k8s\_scale\_set | Name of kubernetes worker scale set | `string` | `""` | no |
 | key\_name | The name of the preexisting key to be used instead of the local public\_key\_path | `string` | `""` | no |
-| lb\_backend\_pool\_id | The ID of the load balancer backend IP pool | `string` | n/a | yes |
 | logging\_filter | String for polkadot logging filter | `string` | `"sync=trace,afg=trace,babe=debug"` | no |
 | namespace | The namespace to deploy into | `string` | `""` | no |
 | network\_name | The network name, ie kusama / mainnet | `string` | `""` | no |
@@ -72,8 +71,9 @@ No requirements.
 | private\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
 | project | Name of the project for node name | `string` | `"project"` | no |
 | prometheus\_enabled | Bool to use when Prometheus is enabled | `bool` | `false` | no |
-| public\_key\_path | The path to the public ssh key | `string` | n/a | yes |
+| public\_key | The public ssh key | `string` | n/a | yes |
 | public\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
+| region | The Azure region to deploy in | `string` | `"eastus"` | no |
 | relay\_node\_ip | Internal IP of Polkadot relay node | `string` | `""` | no |
 | relay\_node\_p2p\_address | P2P address of Polkadot relay node | `string` | `""` | no |
 | ssh\_user | Username for SSH | `string` | `"ubuntu"` | no |
@@ -81,12 +81,20 @@ No requirements.
 | subscription\_id | Azure subscription ID | `string` | n/a | yes |
 | telemetry\_url | WSS URL for telemetry | `string` | `""` | no |
 | tenant\_id | Azure Tenant ID | `string` | n/a | yes |
+| use\_external\_lb | Bool to switch between public (true) or private (false) | `bool` | `true` | no |
+| use\_lb | Bool to enable use of load balancer | `bool` | `true` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | cmd | n/a |
+| lb\_backend\_pool\_id | n/a |
+| lb\_endpoint\_ip | n/a |
+| lb\_frontend\_ip\_config\_name | n/a |
+| lb\_health\_probe\_id | n/a |
+| lb\_id | n/a |
+| lb\_rpc\_rule\_id | n/a |
 | scale\_set\_name | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

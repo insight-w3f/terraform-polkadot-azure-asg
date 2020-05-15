@@ -80,8 +80,8 @@ variable "owner" {
 #####
 # instance
 #####
-variable "public_key_path" {
-  description = "The path to the public ssh key"
+variable "public_key" {
+  description = "The public ssh key"
   type        = string
 }
 
@@ -123,11 +123,6 @@ variable "application_security_group_id" {
 
 variable "network_security_group_id" {
   description = "The id of the network security group to run in"
-  type        = string
-}
-
-variable "lb_backend_pool_id" {
-  description = "The ID of the load balancer backend IP pool"
   type        = string
 }
 
@@ -229,4 +224,26 @@ variable "node_exporter_hash" {
   description = "SHA256 hash of Node Exporter binary"
   type        = string
   default     = "b2503fd932f85f4e5baf161268854bf5d22001869b84f00fd2d1f57b51b72424"
+}
+
+#####
+# Load Balancer
+#####
+
+variable "use_lb" {
+  description = "Bool to enable use of load balancer"
+  type        = bool
+  default     = true
+}
+
+variable "use_external_lb" {
+  description = "Bool to switch between public (true) or private (false)"
+  type        = bool
+  default     = true
+}
+
+variable "region" {
+  description = "The Azure region to deploy in"
+  type        = string
+  default     = "eastus"
 }
