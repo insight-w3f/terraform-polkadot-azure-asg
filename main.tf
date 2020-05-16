@@ -129,4 +129,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
       subnet_id                      = var.private_subnet_id
     }
   }
+
+  depends_on = [azurerm_lb_backend_address_pool.this[0]]
 }
