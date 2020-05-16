@@ -130,5 +130,5 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
     }
   }
 
-  depends_on = [azurerm_lb_backend_address_pool.this[0]]
+  depends_on = [azurerm_lb_rule.substrate-rpc[0]]
 }
