@@ -66,3 +66,20 @@ resource "azurerm_lb_rule" "substrate-rpc" {
   protocol            = "Tcp"
   resource_group_name = data.azurerm_resource_group.this.name
 }
+
+resource "azurerm_lb_rule" "substrate-wss" {
+  count           = var.use_lb ? 1 : 0
+  name            = "substrateWSS"
+  loadbalancer_id = var.use_external_lb ? azurerm_lb.public[0].id : azurerm_lb.private[0].id
+
+  frontend_ip_configuration_name = "api-lb-pub-ip"
+  frontend_port                  = 9944
+
+  backend_address_pool_id = azurerm_lb_backend_address_pool.this[0].id
+  backend_port            = 9944
+  probe_id                = azurerm_lb_probe.node-synced[0].id
+
+  load_distribution   = "SourceIPProtocol"
+  protocol            = "Tcp"
+  resource_group_name = data.azurerm_resource_group.this.name
+}
