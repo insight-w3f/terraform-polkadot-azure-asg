@@ -97,10 +97,22 @@ variable "instance_type" {
   default     = "Standard_A2_v2"
 }
 
-variable "num_instances" {
-  description = "Number of instances for ASG"
-  type        = number
-  default     = 1
+variable "min_size" {
+  description = "The min size of asg"
+  type        = string
+  default     = 0
+}
+
+variable "max_size" {
+  description = "The max size of asg"
+  type        = string
+  default     = 10
+}
+
+variable "desired_capacity" {
+  description = "The desired capacity of asg"
+  type        = string
+  default     = 2
 }
 
 #########

@@ -82,7 +82,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "sentry" {
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   sku                 = var.instance_type
-  instances           = var.num_instances
+  instances           = var.desired_capacity
   admin_username      = "ubuntu"
   custom_data         = base64encode(module.user_data.user_data)
 
