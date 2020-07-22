@@ -1,3 +1,7 @@
+print_:
+  type: print
+  statement: Configuring Polkadot Azure Auto-Scaling Group
+
 azure_instance_family_:
   type: list
   message: What type of virtual machine do you want to run?
