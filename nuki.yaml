@@ -20,15 +20,11 @@ instane_type:
   message: What type of data instances do you want to create?
   choices: "{{ nuki.azure_available_instances_ }}"
 
-num_instances:
-  type: input
-  message: Number of instances to create >>
-  default: 3
-
-
-#tf_variables_:
-#  type: terraform_variables
-#  variables_file: variables.tf
-#  merge: true
-#  var_list:
-#    -
+tf_variables_:
+  type: terraform_variables
+  variables_file: variables.tf
+  merge: true
+  var_list:
+    - min_size
+    - max_size
+    - desired_capacity
