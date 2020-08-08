@@ -1,0 +1,34 @@
+print_:
+  type: print
+  statement: Configuring Polkadot Azure Auto-Scaling Group
+
+azure_instance_family_:
+  type: select
+  message: What type of virtual machine do you want to run?
+  choices:
+    - A
+    - D
+    - DC
+
+azure_available_instances_:
+  type: azure_vm_types
+  region: "{{ nuki.region }}"
+  instance_families: ["{{ nuki.azure_instance_family_ }}"]
+
+instane_type:
+  type: select
+  message: What type of data instances do you want to create?
+  choices: "{{ nuki.azure_available_instances_ }}"
+
+num_instances:
+  type: input
+  message: Number of instances to create >>
+  default: 3
+
+
+#tf_variables_:
+#  type: terraform_variables
+#  variables_file: variables.tf
+#  merge: true
+#  var_list:
+#    -
