@@ -212,7 +212,6 @@ variable "node_exporter_hash" {
 #####
 # Load Balancer
 #####
-
 variable "use_lb" {
   description = "Bool to enable use of load balancer"
   type        = bool
