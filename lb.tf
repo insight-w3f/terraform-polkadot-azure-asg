@@ -11,7 +11,7 @@ resource "azurerm_lb" "public" {
   name                = "api-lb"
   location            = var.region
   resource_group_name = data.azurerm_resource_group.this.name
-  tags                = module.label.tags
+  tags                = var.tags
 
   frontend_ip_configuration {
     name                 = "api-lb-pub-ip"
@@ -24,7 +24,7 @@ resource "azurerm_lb" "private" {
   name                = "api-lb"
   location            = var.region
   resource_group_name = data.azurerm_resource_group.this.name
-  tags                = module.label.tags
+  tags                = var.tags
 
   frontend_ip_configuration {
     name                          = "api-lb-pub-ip"

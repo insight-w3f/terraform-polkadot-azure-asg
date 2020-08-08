@@ -29,10 +29,6 @@ module "this" {
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-No requirements.
-
 ## Providers
 
 | Name | Version |
@@ -42,7 +38,7 @@ No requirements.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+|------|-------------|------|---------|:-----:|
 | application\_security\_group\_id | The id of the application security group to run in | `string` | n/a | yes |
 | azure\_resource\_group\_name | Name of Azure Resource Group | `string` | n/a | yes |
 | chain | Which Polkadot chain to join | `string` | `"kusama"` | no |
@@ -51,13 +47,11 @@ No requirements.
 | cluster\_name | The name of the k8s cluster | `string` | `""` | no |
 | consul\_enabled | Bool to use when Consul is enabled | `bool` | `false` | no |
 | create | Bool to create the resources | `bool` | `true` | no |
-| environment | The environment | `string` | `""` | no |
 | instance\_type | Instance type | `string` | `"Standard_A2_v2"` | no |
 | k8s\_resource\_group | Name of resource group where kubernetes cluster resources are | `string` | `""` | no |
 | k8s\_scale\_set | Name of kubernetes worker scale set | `string` | `""` | no |
 | key\_name | The name of the preexisting key to be used instead of the local public\_key\_path | `string` | `""` | no |
 | logging\_filter | String for polkadot logging filter | `string` | `"sync=trace,afg=trace,babe=debug"` | no |
-| namespace | The namespace to deploy into | `string` | `""` | no |
 | network\_name | The network name, ie kusama / mainnet | `string` | `""` | no |
 | network\_security\_group\_id | The id of the network security group to run in | `string` | n/a | yes |
 | node\_exporter\_hash | SHA256 hash of Node Exporter binary | `string` | `"b2503fd932f85f4e5baf161268854bf5d22001869b84f00fd2d1f57b51b72424"` | no |
@@ -65,7 +59,6 @@ No requirements.
 | node\_exporter\_url | URL to Node Exporter binary | `string` | `"https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz"` | no |
 | node\_exporter\_user | User for node exporter | `string` | `"node_exporter_user"` | no |
 | num\_instances | Number of instances for ASG | `number` | `1` | no |
-| owner | Owner of the infrastructure | `string` | `""` | no |
 | polkadot\_client\_hash | SHA256 hash of Polkadot client binary | `string` | `"c34d63e5d80994b2123a3a0b7c5a81ce8dc0f257ee72064bf06654c2b93e31c9"` | no |
 | polkadot\_client\_url | URL to Polkadot client binary | `string` | `"https://github.com/w3f/polkadot/releases/download/v0.7.32/polkadot"` | no |
 | private\_subnet\_id | The id of the subnet. | `string` | n/a | yes |
@@ -77,8 +70,8 @@ No requirements.
 | relay\_node\_ip | Internal IP of Polkadot relay node | `string` | `""` | no |
 | relay\_node\_p2p\_address | P2P address of Polkadot relay node | `string` | `""` | no |
 | ssh\_user | Username for SSH | `string` | `"ubuntu"` | no |
-| stage | The stage of the deployment | `string` | `""` | no |
 | subscription\_id | Azure subscription ID | `string` | n/a | yes |
+| tags | Tags in the form of key value pairs to associate with resources | `map(string)` | `{}` | no |
 | telemetry\_url | WSS URL for telemetry | `string` | `""` | no |
 | tenant\_id | Azure Tenant ID | `string` | n/a | yes |
 | use\_external\_lb | Bool to switch between public (true) or private (false) | `bool` | `true` | no |
